@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         DataAcquisition dataAcquisition = new DataAcquisition();
         dataAcquisition.setUserData();
-        System.out.println(dataAcquisition.getUserData());
+        FileLoader fileLoader = new FileLoader(dataAcquisition.getUserData());
+        fileLoader.loadToFile();
     }
 }

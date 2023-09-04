@@ -5,10 +5,10 @@ public class UserData {
     private String name;
     private String patronymic;
     private Date birthday;
-    private int phoneNumber;
+    private long phoneNumber;
     private Gender gender;
     public UserData(String surname, String name, String patronymic,
-                    Date birthday, int phoneNumber, Gender gender){
+                    Date birthday, long phoneNumber, Gender gender){
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
@@ -38,7 +38,7 @@ public class UserData {
         return birthday;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -62,7 +62,7 @@ public class UserData {
         this.birthday = birthday;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -1,3 +1,5 @@
+import CustomExeptions.FormatExeption;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -24,11 +26,29 @@ public class DataAcquisition {
         }
     }
     public void setUserData(){
+        boolean flag = false;
         setDataList();
-        setBirthday();
-        setPhoneNumber();
-        setGender();
+        try {
+            setBirthday();
+        } catch (FormatExeption e){
+            out.println(e.getMessage());
+            flag = true;
+        }
+        try {
+            setGender();
+        } catch (FormatExeption e){
+            out.println(e.getMessage());
+            flag = true;
+        }
+        try {
+            setPhoneNumber();
+        } catch (FormatExeption e){
+            out.println(e.getMessage());
+            flag = true;
+        }
         setSNP();
+        if (flag)
+            throw new RuntimeException("Повторите попытку ввода");
     }
     private void setSNP(){
         for (int i = 0; i < dataList.length; i++) {
@@ -41,18 +61,20 @@ public class DataAcquisition {
                     userData.setPatronymic(dataList[i]);
         }
     }
-    private void setPhoneNumber(){
+    private void setPhoneNumber() throws FormatExeption{
         for (int i = 0; i < dataList.length; i++) {
             try {
-                userData.setPhoneNumber(Integer.parseInt(dataList[i]));
+                userData.setPhoneNumber(Long.parseLong(dataList[i]));
                 dataList[i] = null;
                 break;
             } catch (NumberFormatException e){
                 continue;
             }
         }
+        if (userData.getPhoneNumber() == 0)
+            throw new FormatExeption("Нет строки числового формата");
     }
-    private void setBirthday(){
+    private void setBirthday() throws FormatExeption{
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
         for (int i = 0; i < dataList.length; i++) {
             try {
@@ -62,8 +84,10 @@ public class DataAcquisition {
                 continue;
             }
         }
+        if (userData.getBirthday() == null)
+            throw new FormatExeption("Нет строки удовлетворяющей формату даты");
     }
-    private void setGender(){
+    private void setGender() throws FormatExeption{
         for (int i = 0; i < dataList.length; i++) {
             if (dataList[i] != null) {
                 if (dataList[i].equalsIgnoreCase("male")){
@@ -76,5 +100,7 @@ public class DataAcquisition {
                 }
             }
         }
+        if (userData.getGender() == null)
+            throw new FormatExeption("Нет строки указывающего пол");
     }
 }
