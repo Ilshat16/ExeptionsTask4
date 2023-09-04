@@ -31,14 +31,21 @@ public class DataAcquisition {
         setSNP();
     }
     private void setSNP(){
-
+        for (int i = 0; i < dataList.length; i++) {
+            if (dataList[i] != null)
+                if (userData.getSurname() == null)
+                    userData.setSurname(dataList[i]);
+                else if (userData.getName() == null)
+                    userData.setName(dataList[i]);
+                else if (userData.getPatronymic() == null)
+                    userData.setPatronymic(dataList[i]);
+        }
     }
     private void setPhoneNumber(){
-        int phoneNumber = 0;
         for (int i = 0; i < dataList.length; i++) {
             try {
-                phoneNumber = Integer.parseInt(dataList[i]);
-                userData.setPhoneNumber(phoneNumber);
+                userData.setPhoneNumber(Integer.parseInt(dataList[i]));
+                dataList[i] = null;
                 break;
             } catch (NumberFormatException e){
                 continue;
@@ -50,12 +57,24 @@ public class DataAcquisition {
         for (int i = 0; i < dataList.length; i++) {
             try {
                 userData.setBirthday(ft.parse(dataList[i]));
+                dataList[i] = null;
             } catch (ParseException e) {
                 continue;
             }
         }
     }
     private void setGender(){
-
+        for (int i = 0; i < dataList.length; i++) {
+            if (dataList[i] != null) {
+                if (dataList[i].equalsIgnoreCase("male")){
+                    userData.setGender(Gender.MALE);
+                    dataList[i] = null;
+                }
+                else if (dataList[i].equalsIgnoreCase("female")) {
+                    userData.setGender(Gender.FEMALE);
+                    dataList[i] = null;
+                }
+            }
+        }
     }
 }

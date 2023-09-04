@@ -7,6 +7,6 @@ public class Main {
     public static void main(String[] args) {
         DataAcquisition dataAcquisition = new DataAcquisition();
         dataAcquisition.setUserData();
-        System.out.println(dataAcquisition.getUserData().getBirthday());
+        System.out.println(dataAcquisition.getUserData());
     }
 }

@@ -69,4 +69,16 @@ public class UserData {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", birthday=" + birthday +
+                ", phoneNumber=" + phoneNumber +
+                ", gender=" + gender +
+                '}';
+    }
 }
